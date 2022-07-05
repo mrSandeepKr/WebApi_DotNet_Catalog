@@ -24,7 +24,7 @@ namespace Catalog.Controllers
 
         // If GET /items is done then we come here
         [HttpGet]
-        public async Task<IEnumerable<ItemDto>> GetItems()
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync()
         {
             var items = (await repository.GetItemsAsync())
                         .Select( item => item.AsDto());
@@ -33,7 +33,7 @@ namespace Catalog.Controllers
 
         // GET /items/{id}
         [HttpGet("{Id}")]
-        public async Task<ActionResult<ItemDto>> GetItem(Guid Id)
+        public async Task<ActionResult<ItemDto>> GetItemAsync(Guid Id)
         {
             var item = await repository.GetItemAsync(Id);
 
@@ -45,7 +45,7 @@ namespace Catalog.Controllers
         
         // POST /items
         [HttpPost]
-        public async Task<ActionResult<ItemDto>> CreateItem(CreateItemDto itemDto) 
+        public async Task<ActionResult<ItemDto>> CreateItemAsync(CreateItemDto itemDto) 
         {
             Item item = new() {
                 Id = Guid.NewGuid(),
@@ -56,12 +56,12 @@ namespace Catalog.Controllers
 
             await repository.CreateItemAsync(item);
             
-            return CreatedAtAction(nameof(GetItem), new { id = item.Id}, item.AsDto());
+            return CreatedAtAction(nameof(GetItemAsync), new { id = item.Id}, item.AsDto());
         } 
 
         // PUT /item
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateItem(Guid id, UpdateItemDto itemDto) {
+        public async Task<ActionResult> UpdateItemAsync(Guid id, UpdateItemDto itemDto) {
             var existingItem = await repository.GetItemAsync(id);
             if(existingItem == null ) {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace Catalog.Controllers
         
         // DELETE /item/Id
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteItem(Guid id) {
+        public async Task<ActionResult> DeleteItemAsync(Guid id) {
             var existingItem = await repository.GetItemAsync(id);
             if(existingItem == null ) {
                 return NotFound();
