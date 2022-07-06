@@ -78,3 +78,6 @@ namespace Temp
         }
     }
 }
+
+// COMMAND TO ADD Authentication FOR MONGO DOCKER
+// docker run -d --rm --name mongo -p 27017:27017 -v monogodbdata:/data/db -e MONGO_INITDB_ROOT_USERNAME=monogAdmin -e MONGO_INITDB_ROOT_PASSWORD=passE$word
