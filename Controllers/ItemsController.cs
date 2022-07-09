@@ -59,7 +59,7 @@ namespace Catalog.Controllers
             return CreatedAtAction(nameof(GetItemAsync), new { id = item.Id}, item.AsDto());
         } 
 
-        // PUT /item
+        // PUT /item/{id}
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateItemAsync(Guid id, UpdateItemDto itemDto) {
             var existingItem = await repository.GetItemAsync(id);
